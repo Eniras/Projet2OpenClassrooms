@@ -7,18 +7,21 @@ import java.io.FileWriter;
 public class Program {
 
 	public static void main(String[] args) {
+		/**
+		I* Instanciation to read the symptoms in "symptoms.txt then count the words in the list and finally to write the result in "result.out"
+		 * 
+		 */
 		
-		// Instanciation reader data fromfile
 		ReadSymptomDataFromFile readSymptomDataFromFile = new ReadSymptomDataFromFile("symptoms.txt");
 		
 		
 		
-		// Instanciation Analytic counter
+		
 		AnalyticsCounter analyticsCounter = new AnalyticsCounter(readSymptomDataFromFile);
 		analyticsCounter.Counter();
 		
 		
-		// Instanciation Writter data from file
+		
 		
 		WriteSymptomDataToFile writeSymptomDataToFile = new WriteSymptomDataToFile("result.out");
 		
