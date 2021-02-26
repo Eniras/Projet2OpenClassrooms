@@ -1,17 +1,19 @@
 package com.hemebiotech.analytics;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 
 public class AnalyticsCounter {
 
 
+	/* 
 	private static int headacheCount = 0;	//nombre de symptome : mal de tête
 	private static int rashCount = 0;		// nombre de symptome : eruption
 	private static int pupilCount = 0;	    // nombre de symptome : pupille 
-
-
+	 */
+	
 
 	private ReadSymptomDataFromFile readSymptomDataFromFile; // read Symptoms from file 
 
@@ -25,30 +27,31 @@ public class AnalyticsCounter {
 
 	/**
 	 * Counter allows you to browse the list and add 1 each time you find the desired symptom
+	 * @return 
 	 */
 
-	public void Counter () {
+	public TreeMap<String, Integer> Counter () {
 
 		List<String> symptoms = readSymptomDataFromFile.GetSymptoms();
-		HashMap<String,Integer> numberBySymptom = new HashMap<>();
+		TreeMap<String,Integer> numberBySymptom = new TreeMap<>();
 		for (String symptom : symptoms)
 		{	
-			if (symptom.equals("headache")) {
-				boolean isHeadacheExist=numberBySymptom.containsKey("headache");
-				if (isHeadacheExist) {
-					Integer headacheCount= numberBySymptom.get("headache");
-					headacheCount ++;
+			/* if (symptom.equals("headache")) {*/
+				boolean isSymptomExist=numberBySymptom.containsKey(symptom);
+				
+				if (isSymptomExist) {
+					Integer SymptomCount= numberBySymptom.get(symptom);
+					SymptomCount ++;
 
-					numberBySymptom.replace("headache", headacheCount);
+					numberBySymptom.replace(symptom, SymptomCount);
 				}
 				else { 
-					numberBySymptom.put ("headache", 0);
+					numberBySymptom.put (symptom, 0);
 				}
 
-				headacheCount++;
-				System.out.println("number of headaches :" + headacheCount);
+				
 			}
-			else if (symptom.equals("rash")) {
+			/* else if (symptom.equals("rash")) {
 				boolean isRashExist = numberBySymptom.containsKey("rash");
 				if (isRashExist) {
 					Integer rashCount = numberBySymptom.get("rash");
@@ -77,13 +80,15 @@ public class AnalyticsCounter {
 				pupilCount++;
 				System.out.println("number of pupil :" + pupilCount);
 			}
-		}
+		}*/
 		
 		for (Entry<String, Integer> entry : numberBySymptom.entrySet())
 		{
 			System.out.println("For symptom "+ entry.getKey()+ " number of " + entry.getValue());	
 		}
-	}
+		
+		return numberBySymptom;
+	} 
 
 }
 
